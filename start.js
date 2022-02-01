@@ -23,12 +23,19 @@ function showlocation(locationn){
     // console.log(weatherinfo);
 
     var name=document.getElementById("City-info");
+    
     name.innerHTML=`${locationn.name},${locationn.sys.country}`;
     
     var temp=document.getElementById("temp-info");
     temp.innerHTML=`${locationn.main.temp}&deg;C`;
     var weather=document.getElementById("weather-info");
-    weather.innerHTML=`${locationn.weather[0].main}`;
+    weather.innerHTML=`${locationn.weather[0].description}`;
+    var img = document.createElement("img"); 
+ 
+    img.src = `https://openweathermap.org/img/wn/${locationn.weather[0].icon}@2x.png`; 
+    
+    // document.getElementById("weather-logo").src=`https://openweathermap.org/img/wn/${weatherinfo.weather[0].icon}@2x.png`; 
+    document.getElementById("imagee").setAttribute("src", img.src );
     Datee(locationn.timezone)
     var datein=document.getElementById("date-info");
     datein.innerText=Datee(locationn.timezone);
@@ -103,17 +110,17 @@ function Datee(date){
 let year =new Date().toLocaleString('en-in', {year:'numeric' ,  timeZone: zone });
 let month =new Date().toLocaleString('en-in', {month:'long' , timeZone: zone });
 let dates = new Date().toLocaleString('en-in', {day:'2-digit',  timeZone: zone });
-let day = new Date().toLocaleString('en-in', {weekday:'long', timeZone: zone });
+var day = new Date().toLocaleString('en-in', {weekday:'long', timeZone: zone });
+const hours = new Date().toLocaleString('en-in', {hour12:false, hour:'numeric', timeZone: zone });
 let time = new Date().toLocaleString('en-in', {timeStyle:'medium'  , timeZone: zone });
 var timeinfo=document.getElementById("time-info");
     timeinfo.innerHTML=`${time}`;
+    
 
-return `${dates} ${month} (${day}) ,   ${year}`;
+
+return `${dates} ${month} (${day}) ,   ${year}` `${hours}`;
 
  }
-
-
-
 
 
 
@@ -143,6 +150,8 @@ function searching(event){
         
         // console.log(city.value);
         getWeather(city.value);
+        
+        
     }
 }
  function getWeather(cityName){
@@ -150,6 +159,8 @@ function searching(event){
      .then(weatherinfo=>{
          return weatherinfo.json();})
          .then(showweather);
+         
+         
      }
      
         
@@ -157,12 +168,22 @@ function searching(event){
         // console.log(weatherinfo);
     
         var name=document.getElementById("City-info");
-        name.innerHTML=`${weatherinfo.name},${weatherinfo.sys.country}`;
         
+        name.innerHTML=`${weatherinfo.name},${weatherinfo.sys.country}`;
+        // console.log(name.textContent);
         var temp=document.getElementById("temp-info");
         temp.innerHTML=`${weatherinfo.main.temp}&deg;C`;
         var weather=document.getElementById("weather-info");
-        weather.innerHTML=`${weatherinfo.weather[0].main}`;
+        weather.innerHTML=`${weatherinfo.weather[0].description}`;
+       
+        var img = document.createElement("img"); 
+ 
+        img.src = `https://openweathermap.org/img/wn/${weatherinfo.weather[0].icon}@2x.png`; 
+        
+        // document.getElementById("weather-logo").src=`https://openweathermap.org/img/wn/${weatherinfo.weather[0].icon}@2x.png`; 
+        document.getElementById("imagee").setAttribute("src", img.src );
+        
+      
         Datee(weatherinfo.timezone)
         var datein=document.getElementById("date-info");
         datein.innerText=Datee(weatherinfo.timezone);
@@ -242,6 +263,9 @@ function Datee(date){
     var timeinfo=document.getElementById("time-info");
         timeinfo.innerHTML=`${time}`;
 
-    return `${dates} ${month} (${day}) ,   ${year}`;
+    return `${dates} ${month} (${day}),      ${year}`;
     
      }
+     
+       
+     
