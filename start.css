@@ -3,7 +3,7 @@
 .container{
     width: 308px;
 
-    height: 5300px;
+    height: 530px;
     border: 1px black solid;
     font-size: 28px;
     border-radius: 10px;
@@ -23,6 +23,7 @@ input{
 .heading{
     margin: auto;
     padding: 15px;
+    font-size: 46px;
 }
 #City-info{
     padding-left: 10px;
